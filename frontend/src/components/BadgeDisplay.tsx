@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import type { BadgeResponse } from './types';
+import { AtSign, Phone, Linkedin, Github } from 'lucide-react';
 import './print.css';
 
 interface BadgeDisplayProps {
@@ -86,12 +87,23 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
         <h1>{badge.attendee.name}</h1>
 
         <div className="badge-info">
-          <p>📧 {badge.attendee.email}</p>
+          <p>
+            <AtSign size={18} /> {badge.attendee.email}
+          </p>
 
-          {badge.attendee.phone && <p>📱 {badge.attendee.phone}</p>}
+          {badge.attendee.phone && (
+            <p>
+              <Phone size={18} /> {badge.attendee.phone}
+            </p>
+          )}
 
-          <p>💼 linkedin.com/in/{badge.attendee.linkedin}</p>
-          <p>💻 github.com/{badge.attendee.github}</p>
+          <p>
+            <Linkedin size={18} /> linkedin.com/in/
+            {badge.attendee.linkedin}
+          </p>
+          <p>
+            <Github size={18} /> github.com/{badge.attendee.github}
+          </p>
         </div>
 
         <div className="qr-section">

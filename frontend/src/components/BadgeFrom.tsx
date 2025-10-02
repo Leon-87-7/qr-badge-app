@@ -21,6 +21,9 @@ export default function BadgeForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const API_URL =
+    import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -28,7 +31,7 @@ export default function BadgeForm({
 
     try {
       const response = await axios.post<BadgeResponse>(
-        'http://127.0.0.1:8000/generate-qr',
+        `${API_URL}/generate-qr`,
         formData
       );
       onBadgeGenerated(response.data);

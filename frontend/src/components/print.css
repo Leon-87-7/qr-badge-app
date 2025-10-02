@@ -1,0 +1,40 @@
+@media print {
+
+  /* Hide everything except the badge */
+  body * {
+    visibility: hidden;
+  }
+
+  .badge,
+  .badge * {
+    visibility: visible;
+  }
+
+  .badge {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    page-break-after: avoid;
+  }
+
+  /* Remove shadows and optimize for print */
+  .badge {
+    box-shadow: none !important;
+    border: 2px solid #2563eb;
+  }
+}
+
+/* Black and white print mode */
+@media print {
+  body.print-bw .badge {
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+  }
+
+  body.print-bw .badge h1,
+  body.print-bw .badge-info p {
+    color: black !important;
+  }
+}

@@ -1,0 +1,138 @@
+import { useState } from 'react';
+import axios from 'axios';
+import type { AttendeeData, BadgeResponse } from './types';
+
+interface BadgeFormProps {
+  onBadgeGenerated: (badge: BadgeResponse) => void;
+}
+
+export default function BadgeForm({
+  onBadgeGenerated,
+}: BadgeFormProps) {
+  const [formData, setFormData] = useState<AttendeeData>({
+    name: '',
+    email: '',
+    phone: '',
+    linkedin: '',
+    github: '',
+    qr_target: 'personal',
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.post<BadgeResponse>(
+        'http://127.0.0.1:8000/generate-qr',
+        formData
+      );
+      onBadgeGenerated(response.data);
+    } catch (err) {
+      setError('Failed to generate badge. Check backend.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="form"
+    >
+      <h2>Generate Badge</h2>
+
+      <input
+        type="text"
+        placeholder="Name"
+        value={formData.name}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            name: e.target.value,
+          })
+        }
+        required
+      />
+
+      <input
+        type="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            email: e.target.value,
+          })
+        }
+        required
+      />
+
+      <input
+        type="tel"
+        placeholder="Phone (optional)"
+        value={formData.phone}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            phone: e.target.value,
+          })
+        }
+      />
+
+      <input
+        type="text"
+        placeholder="LinkedIn username"
+        value={formData.linkedin}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            linkedin: e.target.value,
+          })
+        }
+        required
+      />
+
+      <input
+        type="text"
+        placeholder="GitHub username"
+        value={formData.github}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            github: e.target.value,
+          })
+        }
+        required
+      />
+
+      <select
+        value={formData.qr_target}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            qr_target: e.target.value as any,
+          })
+        }
+      >
+        <option value="personal">Personal (vCard)</option>
+        <option value="linkedin">LinkedIn</option>
+        <option value="github">GitHub</option>
+      </select>
+
+      {error && <p className="error">{error}</p>}
+
+      <button
+        type="submit"
+        disabled={loading}
+      >
+        {loading ? 'Generating...' : 'Generate Badge'}
+      </button>
+    </form>
+  );
+}

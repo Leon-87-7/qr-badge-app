@@ -1,3 +1,12 @@
+:root {
+  --primary-CTA: hsl(288, 37%, 46%);
+  --secondary-CTA: hsl(145, 76%, 66%);
+  --accent-color: #hsl(215, 88%, 70%);
+  --error-color: #dc2626;
+  --background-color: #1f2937;
+  --text-color: #faebd7;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,8 +23,8 @@ body {
 }
 
 header {
-  background: linear-gradient(135deg, #66ea9d 0%, #914ba2 100%);
-  color: antiquewhite;
+  background: linear-gradient(135deg, var(--secondary-CTA) 0%, var(--primary-CTA) 100%);
+  color: var(--text-color);
   padding: 2rem;
   text-align: center;
   font-size: 0.875rem;
@@ -33,7 +42,7 @@ header {
 
 /* Form Section */
 .form-section {
-  background: #1f2937;
+  background: var(--background-color);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -53,7 +62,7 @@ header {
 .form input,
 .form select {
   padding: 0.75rem;
-  border: 1px solid #6fa7f6;
+  border: 1px solid var(--accent-color);
   border-radius: 4px;
   font-size: 1rem;
 }
@@ -61,13 +70,13 @@ header {
 .form input:focus,
 .form select:focus {
   outline: none;
-  border-color: #2563eb;
+  border-color: var(--primary-CTA);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .form button {
   padding: 0.75rem;
-  background: #2563eb;
+  background: var(--primary-CTA);
   color: white;
   border: none;
   border-radius: 4px;
@@ -78,7 +87,7 @@ header {
 }
 
 .form button:hover:not(:disabled) {
-  background: #1d4ed8;
+  background: hsl(288, 37%, 36%);
 }
 
 .form button:disabled {
@@ -87,7 +96,7 @@ header {
 }
 
 .error {
-  color: #dc2626;
+  color: var(--error-color);
   font-size: 0.875rem;
   padding: 0.5rem;
   background: #fee2e2;
@@ -96,7 +105,7 @@ header {
 
 /* Badge Display */
 .display-section {
-  background: #1f2937;
+  background: var(--background-color);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -164,8 +173,8 @@ header {
 
 .print-btn {
   padding: 0.75rem;
-  background: #059669;
-  color: white;
+  background: var(--secondary-CTA);
+  color: rgb(46, 27, 27);
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -175,7 +184,7 @@ header {
 }
 
 .print-btn:hover {
-  background: #047857;
+  background: hsl(145, 76%, 56%);
 }
 
 /* Responsive */
@@ -183,6 +192,34 @@ header {
   .container {
     grid-template-columns: 1fr;
   }
+}
+
+/* Action Buttons Container */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.save-btn {
+  padding: 0.75rem;
+  background: var(--primary-CTA);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.save-btn:hover:not(:disabled) {
+  background: hsl(288, 37%, 36%);
+}
+
+.save-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
 }
 
 /* Print Options */

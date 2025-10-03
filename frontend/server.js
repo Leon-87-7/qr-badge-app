@@ -8,11 +8,11 @@ const __dirname = dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files from dist folder
+// Serve static files
 app.use(express.static(join(__dirname, 'dist')));
 
-// Handle client-side routing
-app.get('/*', (req, res) => {
+// Fallback for SPA routing
+app.use((req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 

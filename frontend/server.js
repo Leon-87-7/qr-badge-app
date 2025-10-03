@@ -8,6 +8,9 @@ const __dirname = dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
+console.log('PORT environment variable:', process.env.PORT);
+console.log('Using port:', port);
+
 // Serve static files
 app.use(express.static(join(__dirname, 'dist')));
 

@@ -21,8 +21,7 @@ export default function BadgeForm({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL =
-    import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+  const API_URL = 'https://qrmeback.up.railway.app';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

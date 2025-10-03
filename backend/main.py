@@ -19,7 +19,7 @@ app.add_middleware(
     "http://127.0.0.1:5173",
     "https://*.up.railway.app",
     'https://qrme.up.railway.app',
-    "https://qr-badge-app.vercel.app",
+    "https://qrme-badge-app.vercel.app",
     "https://*.vercel.app"
     ],
   allow_credentials=True,

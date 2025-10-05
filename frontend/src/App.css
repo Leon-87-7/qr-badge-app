@@ -1,10 +1,12 @@
 :root {
   --primary-CTA: hsl(288, 37%, 46%);
-  --secondary-CTA: hsl(145, 76%, 66%);
-  --accent-color: #hsl(215, 88%, 70%);
+  --secondary-CTA: hsl(145, 76%, 56%);
+  --accent-color: hsl(215, 88%, 70%);
   --error-color: hsl(0, 72%, 51%);
+  --background-btn: hsl(212, 12%, 22%);
   --background-color: hsl(215, 28%, 17%);
   --text-color: hsl(34, 78%, 91%);
+  --text-color-dark: var(--background-color);
 }
 
 * {
@@ -19,7 +21,7 @@ body {
 }
 
 .app {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 header {
@@ -131,15 +133,20 @@ header {
 .badge {
   border: 2px solid #2563eb;
   border-radius: 8px;
-  padding: 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: var(--text-color);
+  padding: 3rem 6rem;
+  margin: 0 auto;
+  background: linear-gradient(-125deg, var(--secondary-CTA) 20%, var(--accent-color) 40%, var(--primary-CTA) 80%);
+  color: var(--text-color-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .badge h1 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   text-align: center;
+
 }
 
 .badge-info {
@@ -147,23 +154,27 @@ header {
 }
 
 .badge-info p {
+  font-family: monospace;
   margin: 0.3rem 2rem;
   font-size: 0.875rem;
 
 }
 
 .qr-section {
-  background: white;
+  background: transparent;
+  max-width: 18rem;
   padding: 1rem;
   border-radius: 8px;
   text-align: center;
 }
 
 .qr-code {
+  border-radius: 10px;
   width: 200px;
   height: 200px;
   display: block;
   margin: 0 auto;
+
 }
 
 .qr-label {
@@ -191,11 +202,12 @@ header {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.6s;
+
 }
 
 .save-btn:hover:not(:disabled) {
-  background: hsl(288, 37%, 36%);
+  background: hsl(212, 12%, 22%);
 }
 
 .save-btn:disabled {
@@ -212,25 +224,24 @@ header {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.6s;
 }
 
 .print-btn:hover {
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
 .main-print-btn {
-  width: 70%;
+  margin-top: 1rem;
+  width: 80%;
   background: var(--secondary-CTA);
   color: #371f2e;
 }
 
 .main-print-btn:hover {
-  background: hsl(145, 76%, 56%);
-  color: #371f2e;
+  background: var(--background-btn);
+  color: var(--text-color)
 }
-
-
 
 .print-options {
   font-weight: 600;
@@ -240,21 +251,23 @@ header {
 }
 
 .print-buttons {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    'print-bw-btn print-bw-btn print-bw-btn'
-    'print-color print-color print-cancel';
-  /* grid-column-gap: 0.2rem; */
-  grid-row-gap: 0.8rem;
+  margin-inline: auto;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
+  .print-row-btn {
+    margin-inline: auto;
+    width: 80%;
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.8rem;
+  }
 }
 
 .print-bw-btn {
   background: #374151;
-  grid-area: print-bw-btn;
 }
 
 .print-bw-btn:hover {
@@ -262,8 +275,8 @@ header {
 }
 
 .print-color {
-  background: #2563eb;
-  grid-area: print-color;
+  background: var(--secondary-CTA);
+  flex: 2;
 }
 
 .print-color:hover {
@@ -271,9 +284,9 @@ header {
 }
 
 .print-cancel {
-  grid-area: print-cancel;
   background: #6b7280;
   color: #2e1b1b;
+  flex: 1;
 }
 
 .print-cancel:hover {
@@ -300,8 +313,7 @@ header {
   .print-buttons {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    grid-template-areas:
-      'print-bw-btn'
+    grid-template-areas: 'print-bw-btn'
       'print-color'
       'print-cancel';
   }

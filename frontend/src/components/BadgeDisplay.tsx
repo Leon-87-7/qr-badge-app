@@ -144,18 +144,20 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
               >
                 Black & White
               </button>
-              <button
-                onClick={() => handlePrint(false)}
-                className="print-btn print-color"
-              >
-                Color
-              </button>
-              <button
-                onClick={() => setShowPrintOptions(false)}
-                className="print-btn print-cancel"
-              >
-                Cancel
-              </button>
+              <div className="print-row-btn">
+                <button
+                  onClick={() => handlePrint(false)}
+                  className="print-btn print-color"
+                >
+                  Color
+                </button>
+                <button
+                  onClick={() => setShowPrintOptions(false)}
+                  className="print-btn print-cancel"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         )}

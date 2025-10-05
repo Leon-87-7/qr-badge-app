@@ -1,12 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import {
-  FormControl,
-  TextInput,
-  Select,
-  Button,
-  Stack,
-} from '@primer/react-brand';
 import type { AttendeeData, BadgeResponse } from './types';
 
 interface BadgeFormProps {
@@ -56,20 +49,11 @@ export default function BadgeForm({
     >
       <h2>Generate Badge</h2>
 
-      <Stack
-        direction="vertical"
-        gap="condensed"
-      >
-        <FormControl
-          fullWidth
-          required
-        >
-          <FormControl.Label style={{ color: 'antiquewhite' }}>
-            Name
-          </FormControl.Label>
-          <TextInput
+      <div className="form-stack">
+        <div className="form-control">
+          <label>Name</label>
+          <input
             type="text"
-            placeholder="Name"
             value={formData.name}
             onChange={(e) =>
               setFormData({
@@ -79,18 +63,12 @@ export default function BadgeForm({
             }
             required
           />
-        </FormControl>
+        </div>
 
-        <FormControl
-          fullWidth
-          required
-        >
-          <FormControl.Label style={{ color: 'antiquewhite' }}>
-            Email
-          </FormControl.Label>
-          <TextInput
+        <div className="form-control">
+          <label>Email</label>
+          <input
             type="email"
-            placeholder="Email"
             value={formData.email}
             onChange={(e) =>
               setFormData({
@@ -100,15 +78,12 @@ export default function BadgeForm({
             }
             required
           />
-        </FormControl>
+        </div>
 
-        <FormControl fullWidth>
-          <FormControl.Label style={{ color: 'antiquewhite' }}>
-            Phone (optional)
-          </FormControl.Label>
-          <TextInput
+        <div className="form-control">
+          <label>Phone (optional)</label>
+          <input
             type="tel"
-            placeholder="Phone"
             value={formData.phone}
             onChange={(e) =>
               setFormData({
@@ -117,18 +92,12 @@ export default function BadgeForm({
               })
             }
           />
-        </FormControl>
+        </div>
 
-        <FormControl
-          fullWidth
-          required
-        >
-          <FormControl.Label style={{ color: 'antiquewhite' }}>
-            LinkedIn username
-          </FormControl.Label>
-          <TextInput
+        <div className="form-control">
+          <label>LinkedIn username</label>
+          <input
             type="text"
-            placeholder="LinkedIn username"
             value={formData.linkedin}
             onChange={(e) =>
               setFormData({
@@ -138,18 +107,12 @@ export default function BadgeForm({
             }
             required
           />
-        </FormControl>
+        </div>
 
-        <FormControl
-          fullWidth
-          required
-        >
-          <FormControl.Label style={{ color: 'antiquewhite' }}>
-            GitHub username
-          </FormControl.Label>
-          <TextInput
+        <div className="form-control">
+          <label>GitHub username</label>
+          <input
             type="text"
-            placeholder="GitHub username"
             value={formData.github}
             onChange={(e) =>
               setFormData({
@@ -159,13 +122,12 @@ export default function BadgeForm({
             }
             required
           />
-        </FormControl>
+        </div>
 
-        <FormControl>
-          <FormControl.Label style={{ color: 'antiquewhite' }}>
-            Select QR Code Target
-          </FormControl.Label>
-          <Select
+        <div className="form-control">
+          <label>Select QR Code Target</label>
+
+          <select
             value={formData.qr_target}
             onChange={(e) =>
               setFormData({
@@ -174,24 +136,22 @@ export default function BadgeForm({
               })
             }
           >
-            <Select.Option value="personal">
-              Personal (vCard)
-            </Select.Option>
-            <Select.Option value="linkedin">LinkedIn</Select.Option>
-            <Select.Option value="github">GitHub</Select.Option>
-          </Select>
-        </FormControl>
-      </Stack>
+            <option value="personal">Personal (vCard)</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="github">GitHub</option>
+          </select>
+        </div>
+      </div>
 
       {error && <p className="error">{error}</p>}
 
-      <Button
+      <button
         type="submit"
         disabled={loading}
-        variant="primary"
+        className="btn-primary"
       >
         {loading ? 'Generating...' : 'Generate Badge'}
-      </Button>
+      </button>
     </form>
   );
 }

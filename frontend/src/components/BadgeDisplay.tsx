@@ -130,25 +130,25 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
         {!showPrintOptions ? (
           <button
             onClick={() => setShowPrintOptions(true)}
-            className="print-btn"
+            className="print-btn main-print-btn"
           >
             Print Badge
           </button>
         ) : (
-          <div className="print-options">
-            <p>Choose print style:</p>
+          <div>
+            <p className="print-options">Choose print style:</p>
             <div className="print-buttons">
-              <button
-                onClick={() => handlePrint(false)}
-                className="print-btn print-color"
-              >
-                Color
-              </button>
               <button
                 onClick={() => handlePrint(true)}
                 className="print-btn print-bw-btn"
               >
                 Black & White
+              </button>
+              <button
+                onClick={() => handlePrint(false)}
+                className="print-btn print-color"
+              >
+                Color
               </button>
               <button
                 onClick={() => setShowPrintOptions(false)}

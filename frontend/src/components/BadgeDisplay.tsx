@@ -113,7 +113,7 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
             className="qr-code"
           />
           <p className="qr-label">
-            Scan for {badge.attendee.qr_target}
+            Scan for {badge.attendee.qr_target} info
           </p>
         </div>
       </div>

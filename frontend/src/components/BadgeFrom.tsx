@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
 import type { AttendeeData, BadgeResponse } from './types';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface BadgeFormProps {
   onBadgeGenerated: (badge: BadgeResponse) => void;
@@ -43,16 +53,16 @@ export default function BadgeForm({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="form"
-    >
-      <h2>Generate Badge</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <h2 className="text-text text-2xl font-bold">Generate Badge</h2>
 
-      <div className="form-stack">
-        <div className="form-control">
-          <label>Name</label>
-          <input
+      <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="name" className="text-text">
+            Name
+          </Label>
+          <Input
+            id="name"
             type="text"
             value={formData.name}
             onChange={(e) =>
@@ -62,12 +72,16 @@ export default function BadgeForm({
               })
             }
             required
+            className="bg-background text-text border-accent"
           />
         </div>
 
-        <div className="form-control">
-          <label>Email</label>
-          <input
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="email" className="text-text">
+            Email
+          </Label>
+          <Input
+            id="email"
             type="email"
             value={formData.email}
             onChange={(e) =>
@@ -77,12 +91,16 @@ export default function BadgeForm({
               })
             }
             required
+            className="bg-background text-text border-accent"
           />
         </div>
 
-        <div className="form-control">
-          <label>Phone (optional)</label>
-          <input
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="phone" className="text-text">
+            Phone (optional)
+          </Label>
+          <Input
+            id="phone"
             type="tel"
             value={formData.phone}
             onChange={(e) =>
@@ -91,12 +109,16 @@ export default function BadgeForm({
                 phone: e.target.value,
               })
             }
+            className="bg-background text-text border-accent"
           />
         </div>
 
-        <div className="form-control">
-          <label>LinkedIn username</label>
-          <input
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="linkedin" className="text-text">
+            LinkedIn username
+          </Label>
+          <Input
+            id="linkedin"
             type="text"
             value={formData.linkedin}
             onChange={(e) =>
@@ -106,12 +128,16 @@ export default function BadgeForm({
               })
             }
             required
+            className="bg-background text-text border-accent"
           />
         </div>
 
-        <div className="form-control">
-          <label>GitHub username</label>
-          <input
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="github" className="text-text">
+            GitHub username
+          </Label>
+          <Input
+            id="github"
             type="text"
             value={formData.github}
             onChange={(e) =>
@@ -121,37 +147,48 @@ export default function BadgeForm({
               })
             }
             required
+            className="bg-background text-text border-accent"
           />
         </div>
 
-        <div className="form-control">
-          <label>Select QR Code Target</label>
-
-          <select
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="qr-target" className="text-text">
+            Select QR Code Target
+          </Label>
+          <Select
             value={formData.qr_target}
-            onChange={(e) =>
+            onValueChange={(value) =>
               setFormData({
                 ...formData,
-                qr_target: e.target.value as any,
+                qr_target: value as any,
               })
             }
           >
-            <option value="personal">Personal (vCard)</option>
-            <option value="linkedin">LinkedIn</option>
-            <option value="github">GitHub</option>
-          </select>
+            <SelectTrigger className="bg-background text-text border-accent">
+              <SelectValue placeholder="Select target" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="personal">Personal (vCard)</SelectItem>
+              <SelectItem value="linkedin">LinkedIn</SelectItem>
+              <SelectItem value="github">GitHub</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
-      {error && <p className="error">{error}</p>}
+      {error && (
+        <p className="text-error text-sm px-3 py-2 bg-red-100 rounded">
+          {error}
+        </p>
+      )}
 
-      <button
+      <Button
         type="submit"
         disabled={loading}
-        className="btn-primary"
+        className="w-full bg-primary text-text hover:bg-primary-hover"
       >
         {loading ? 'Generating...' : 'Generate Badge'}
-      </button>
+      </Button>
     </form>
   );
 }

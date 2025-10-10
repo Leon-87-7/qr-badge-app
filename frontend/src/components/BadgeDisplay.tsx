@@ -81,7 +81,7 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className="border-2 border-blue-600 rounded-lg p-8 mx-auto bg-gradient-badge text-text-dark flex flex-col items-center print-badge-color"
+        className="badge border-2 border-blue-600 rounded-lg p-8 mx-auto bg-gradient-badge text-text-dark flex flex-col items-center print-badge-color"
         ref={badgeRef}
       >
         <h1 className="text-3xl font-bold mb-6 text-center capitalize">

@@ -21,7 +21,14 @@
   /* Remove shadows and optimize for print */
   .badge {
     box-shadow: none !important;
-    border: 2px solid #2563eb;
+    border: 2px solid #2563eb !important;
+  }
+
+  /* Ensure gradient backgrounds print properly */
+  .badge {
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 
@@ -29,12 +36,18 @@
 @media print {
   body.print-bw .badge {
     background: white !important;
+    background-image: none !important;
     color: black !important;
     border: 2px solid black !important;
   }
 
   body.print-bw .badge h1,
-  body.print-bw .badge-info p {
+  body.print-bw .badge p {
     color: black !important;
+  }
+
+  body.print-bw .badge svg {
+    color: black !important;
+    stroke: black !important;
   }
 }

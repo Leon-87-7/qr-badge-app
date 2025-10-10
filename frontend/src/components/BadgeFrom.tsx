@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { AttendeeData, BadgeResponse } from './types';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -45,7 +45,7 @@ export default function BadgeForm({
       );
       onBadgeGenerated(response.data);
     } catch (err) {
-      setError('Failed to generate badge. Check backend.');
+      setError('Failed to generate badge. Check logs.');
       console.error(err);
     } finally {
       setLoading(false);
@@ -53,12 +53,18 @@ export default function BadgeForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-6"
+    >
       <h2 className="text-text text-2xl font-bold">Generate Badge</h2>
 
       <div className="flex flex-col gap-4 w-full">
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="name" className="text-text">
+        <div className="self-center w-11/12 self-center w-11/12 flex flex-col gap-2">
+          <Label
+            htmlFor="name"
+            className="text-text"
+          >
             Name
           </Label>
           <Input
@@ -72,12 +78,15 @@ export default function BadgeForm({
               })
             }
             required
-            className="bg-background text-text border-accent"
+            className=" bg-background text-text border-accent"
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="email" className="text-text">
+        <div className="self-center w-11/12 flex flex-col gap-2">
+          <Label
+            htmlFor="email"
+            className="text-text"
+          >
             Email
           </Label>
           <Input
@@ -95,8 +104,11 @@ export default function BadgeForm({
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="phone" className="text-text">
+        <div className="self-center w-11/12 flex flex-col gap-2">
+          <Label
+            htmlFor="phone"
+            className="text-text"
+          >
             Phone (optional)
           </Label>
           <Input
@@ -112,47 +124,57 @@ export default function BadgeForm({
             className="bg-background text-text border-accent"
           />
         </div>
+        <div className="self-center flex gap-8 md:flex-row md:gap-4 w-11/12">
+          <div className="self-center w-1/2 flex flex-col gap-2">
+            <Label
+              htmlFor="linkedin"
+              className="text-text"
+            >
+              LinkedIn username
+            </Label>
+            <Input
+              id="linkedin"
+              type="text"
+              value={formData.linkedin}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  linkedin: e.target.value,
+                })
+              }
+              required
+              className="bg-background text-text border-accent"
+            />
+          </div>
 
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="linkedin" className="text-text">
-            LinkedIn username
-          </Label>
-          <Input
-            id="linkedin"
-            type="text"
-            value={formData.linkedin}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                linkedin: e.target.value,
-              })
-            }
-            required
-            className="bg-background text-text border-accent"
-          />
+          <div className="self-center w-1/2 flex flex-col gap-2">
+            <Label
+              htmlFor="github"
+              className="text-text"
+            >
+              GitHub username
+            </Label>
+            <Input
+              id="github"
+              type="text"
+              value={formData.github}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  github: e.target.value,
+                })
+              }
+              required
+              className="bg-background text-text border-accent"
+            />
+          </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="github" className="text-text">
-            GitHub username
-          </Label>
-          <Input
-            id="github"
-            type="text"
-            value={formData.github}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                github: e.target.value,
-              })
-            }
-            required
-            className="bg-background text-text border-accent"
-          />
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="qr-target" className="text-text">
+        <div className="self-center w-11/12 flex flex-col gap-2">
+          <Label
+            htmlFor="qr-target"
+            className="text-text "
+          >
             Select QR Code Target
           </Label>
           <Select
@@ -167,8 +189,10 @@ export default function BadgeForm({
             <SelectTrigger className="bg-background text-text border-accent">
               <SelectValue placeholder="Select target" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="personal">Personal (vCard)</SelectItem>
+            <SelectContent className="bg-background-body text-text border-accent">
+              <SelectItem value="personal">
+                Personal (vCard)
+              </SelectItem>
               <SelectItem value="linkedin">LinkedIn</SelectItem>
               <SelectItem value="github">GitHub</SelectItem>
             </SelectContent>
@@ -182,13 +206,13 @@ export default function BadgeForm({
         </p>
       )}
 
-      <Button
+      <button
         type="submit"
         disabled={loading}
-        className="w-full bg-primary text-text hover:bg-primary-hover"
+        className="px-3 py-3 mx-auto w-4/5 bg-primary text-text border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-background-btn disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         {loading ? 'Generating...' : 'Generate Badge'}
-      </Button>
+      </button>
     </form>
   );
 }

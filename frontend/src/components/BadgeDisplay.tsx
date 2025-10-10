@@ -81,10 +81,12 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className="border-2 border-blue-600 rounded-lg px-24 py-12 mx-auto bg-gradient-badge text-text-dark flex flex-col items-center print-badge-color"
+        className="border-2 border-blue-600 rounded-lg p-8 mx-auto bg-gradient-badge text-text-dark flex flex-col items-center print-badge-color"
         ref={badgeRef}
       >
-        <h1 className="text-3xl font-bold mb-6 text-center">{badge.attendee.name}</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center capitalize">
+          {badge.attendee.name}
+        </h1>
 
         <div className="mb-6">
           <p className="font-mono mx-8 my-1.5 text-sm flex items-center gap-2">
@@ -120,8 +122,8 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
 
       <div className="flex flex-col m-2">
         <button
-          onClick={handleSavePNG}
           className="px-3 py-3 mx-auto w-4/5 bg-primary text-text border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-background-btn disabled:bg-gray-400 disabled:cursor-not-allowed"
+          onClick={handleSavePNG}
           disabled={saving}
         >
           {saving ? 'Saving...' : 'Save as PNG'}
@@ -136,24 +138,26 @@ export default function BadgeDisplay({ badge }: BadgeDisplayProps) {
           </button>
         ) : (
           <div>
-            <p className="font-semibold text-[#5b6a8a] text-center my-2">Choose print style:</p>
+            <p className="font-semibold text-[#5b6a8a] text-center my-2">
+              Choose print style:
+            </p>
             <div className="mx-auto mt-2 flex flex-col justify-center">
               <button
                 onClick={() => handlePrint(true)}
-                className="w-4/5 mx-auto px-3 py-3 bg-gray-700 text-white border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-gray-800"
+                className="w-4/5 mx-auto px-3 py-3 bg-gray-700 text-white border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-gray-900"
               >
                 Black & White
               </button>
               <div className="mx-auto w-4/5 mt-3 flex gap-3">
                 <button
                   onClick={() => handlePrint(false)}
-                  className="flex-[2] px-3 py-3 bg-secondary text-white border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-gray-800"
+                  className="flex-[2] px-3 py-3 bg-secondary text-text-dark hover:text-text border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-gray-900"
                 >
                   Color
                 </button>
                 <button
                   onClick={() => setShowPrintOptions(false)}
-                  className="flex-1 px-3 py-3 bg-gray-500 text-[#2e1b1b] border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-[#371f2e]"
+                  className="flex-1 px-3 py-3 bg-gray-500 text-[#2e1b1b] border-none rounded-xl text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-[#371f2e] hover:text-text"
                 >
                   Cancel
                 </button>

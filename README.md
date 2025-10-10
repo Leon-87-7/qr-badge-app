@@ -2,6 +2,8 @@
 
 A full-stack application that generates printable event badges with QR codes for conferences and networking events. Create professional badges containing contact information with QR codes linking to LinkedIn, GitHub, or a complete vCard.
 
+**Live Demo:** [https://qrme-badge-app.vercel.app/](https://qrme-badge-app.vercel.app/)
+
 ![Badge Preview](https://img.shields.io/badge/React-19.1.1-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-Python-green) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v3.4.x-blue)
 
 ## Features

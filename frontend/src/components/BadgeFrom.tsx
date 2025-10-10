@@ -57,7 +57,13 @@ export default function BadgeForm({
       onSubmit={handleSubmit}
       className="flex flex-col gap-6"
     >
-      <h2 className="text-text text-2xl font-bold">Generate Badge</h2>
+      <h2 className="text-text self-end px-8 text-2xl font-bold">
+        Generate Badge
+      </h2>
+
+      <p className="font-semibold text-[#5b6a8a] text-center ">
+        Fill in the details below to generate your QR code badge.
+      </p>
 
       <div className="flex flex-col gap-4 w-full">
         <div className="self-center w-11/12 flex flex-col gap-2">

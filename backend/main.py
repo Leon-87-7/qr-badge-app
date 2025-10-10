@@ -48,7 +48,7 @@ def read_root():
 
 def generate_qr(attendee: AttendeeData) -> Dict[str, Any]:
     if attendee.qr_target == QRTarget.linkedin:
-        qr_url = f"LinkedIn: https://www.linkedin.com/in/{attendee.linkedin}"
+        qr_url = f"https://www.linkedin.com/in/{attendee.linkedin}"
     elif attendee.qr_target == QRTarget.github:
         qr_url = f"GitHub: https://github.com/{attendee.github}"
     elif attendee.qr_target == QRTarget.personal:

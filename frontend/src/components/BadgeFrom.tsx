@@ -60,7 +60,7 @@ export default function BadgeForm({
       <h2 className="text-text text-2xl font-bold">Generate Badge</h2>
 
       <div className="flex flex-col gap-4 w-full">
-        <div className="self-center w-11/12 self-center w-11/12 flex flex-col gap-2">
+        <div className="self-center w-11/12 flex flex-col gap-2">
           <Label
             htmlFor="name"
             className="text-text"

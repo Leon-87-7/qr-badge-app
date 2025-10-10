@@ -45,13 +45,16 @@ uvicorn main:app --reload
 ### Backend Structure (`backend/main.py`)
 
 - Single FastAPI file handling all logic
+- **Dependencies**: FastAPI 0.118.0, qrcode 8.2, Pillow 11.3.0, Pydantic 2.11.9, uvicorn 0.37.0
 - **QRTarget enum**: `linkedin`, `github`, `personal`
-- **AttendeeData model**: Pydantic model for form data validation
+- **AttendeeData model**: Pydantic model for form data validation (name, email, phone, linkedin, github, qr_target)
+- **`/` endpoint**: Health check returning API status
 - **`/generate-qr` endpoint**: Generates QR codes with different formats:
-  - LinkedIn: Direct URL link
-  - GitHub: Direct URL link
-  - Personal: vCard format with all contact details
-- CORS configured for localhost, Railway, and Vercel domains
+  - LinkedIn: Direct URL link (`https://www.linkedin.com/in/{username}`)
+  - GitHub: Direct URL link (`https://github.com/{username}`)
+  - Personal: vCard 3.0 format with all contact details (name, email, phone if provided, LinkedIn, GitHub)
+  - Returns base64-encoded PNG QR image with data URI prefix, attendee data, and QR URL
+- CORS configured for localhost (ports 3000 and 5173), Railway (*.up.railway.app), and Vercel (*.vercel.app) domains
 
 ### Frontend Structure
 
@@ -59,27 +62,42 @@ uvicorn main:app --reload
 - **components/BadgeFrom.tsx**: Form for user input, posts to backend API
   - API URL hardcoded: `https://qrmeback.up.railway.app`
 - **components/BadgeDisplay.tsx**: Renders badge with QR code
-  - Print functionality (color/B&W toggle)
-  - PNG export using html2canvas
+  - Print functionality with `showPrintOptions` state (color/B&W toggle)
+  - PNG export using html2canvas with 2x scale for quality
+  - Uses refs (`badgeRef`) and html2canvas for image capture
+  - Lucide React icons: AtSign, Phone, Linkedin, Github
 - **components/types.ts**: Shared TypeScript types matching backend models
 - **components/print.css**: Print-specific styles
 
 ### Build Configuration
 
-- Uses Vite with SWC plugin for fast refresh
-- `rolldown-vite` package override for experimental Rolldown bundler
-- TypeScript strict mode enabled
-- ESLint configured for React + TypeScript
-- **Tailwind CSS v3.4.x** for styling
+- **Vite 7.1.12** (via `rolldown-vite` override) with SWC plugin (@vitejs/plugin-react-swc 4.1.0)
+- **TypeScript 5.8.3** with strict mode enabled
+- **ESLint 9.36** with typescript-eslint 8.44 and React plugins
+- **React 19.1.1** with React DOM
+- **Tailwind CSS v3.4.18** for styling
   - Custom color palette matching original design
   - Mobile-first responsive design
   - Utility-first approach with minimal global CSS
+- **Additional dependencies**:
+  - Radix UI components (icons, label, select, slot)
+  - Lucide React 0.544 for icons (used in BadgeDisplay)
+  - html2canvas 1.4.1 for PNG export
+  - Axios 1.12.2 for HTTP requests
+  - Express 5.1.0 for production server
+  - class-variance-authority, clsx, tailwind-merge for styling utilities
 
 ## Deployment
 
-- **Frontend**: Vercel (uses nixpacks.toml for build config)
-- **Backend**: Railway (uses Procfile for deployment)
+- **Frontend**: Vercel at `https://qrme-badge-app.vercel.app`
+  - Uses nixpacks.toml for build config
+  - Production server runs via Express (server.js)
+  - Build script: `tsc -b && vite build`
+- **Backend**: Railway at `https://qrmeback.up.railway.app`
+  - Uses Procfile for deployment
+  - Deployment command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 - Backend CORS allows requests from both localhost and production domains
+- Git workflow: main branch for production
 
 ## API Integration
 
